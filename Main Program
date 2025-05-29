@@ -1,0 +1,34 @@
+import pygame as pyg
+from tkinter import *
+from tkinter import messagebox
+from PIL import Image, ImageTk
+import sys
+
+pyg.init()
+
+w,h= 600,500
+#screen= pyg.display.set_mode((600,500))
+screen= pyg.Surface((w,h))
+
+maze= Tk()
+maze.title("Maze Solver")
+maze.geometry("1000x600")
+maze.config(background="#55465a")
+
+pyg.display.set_caption("Canvas")
+
+mc= Canvas(maze, width=w, height=h)
+mc.pack()
+
+run=True
+while run:
+    for i in pyg.event.get():
+        if i.type == pyg.QUIT:
+            run=False
+    screen.fill((255,255,255)) #rgb colour
+
+    pyg.display.flip()
+pyg.quit()
+
+
+maze.mainloop()
