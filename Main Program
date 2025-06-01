@@ -4,31 +4,48 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import sys
 
+#--------------------------------------important definition--------------------------------
+gap_between_lines = 25
+line_thickness = 4
+
+
+
 pyg.init()
 
 w,h= 600,500
-#screen= pyg.display.set_mode((600,500))
-screen= pyg.Surface((w,h))
+screen= pyg.display.set_mode((600,500))
+# screen= pyg.Surface((w,h))
 
-maze= Tk()
-maze.title("Maze Solver")
-maze.geometry("1000x600")
-maze.config(background="#55465a")
+#-------------------------------------------functions--------------------------------------
+def drawLine(start_coordinate, length, orientation = 'V'):
+    '''V - vertical, H - horizontal'''
+    if orientation == 'V':
+        pyg.draw.line(screen, "#000000", start_coordinate, (start_coordinate[0], start_coordinate[1] + length), line_thickness)
+    else:
+        pyg.draw.line(screen, "#000000", start_coordinate, (start_coordinate[0] + length, start_coordinate[1]), line_thickness)
+
+# maze= Tk()
+# maze.title("Maze Solver")
+# maze.geometry("1000x600")
+# maze.config(background="#55465a")
 
 pyg.display.set_caption("Canvas")
-
-mc= Canvas(maze, width=w, height=h)
-mc.pack()
+# mc= Canvas(maze, width=w, height=h)
+# mc.pack()
 
 run=True
 while run:
     for i in pyg.event.get():
         if i.type == pyg.QUIT:
             run=False
-    screen.fill((255,255,255)) #rgb colour
-
+    screen.fill((124,252,0)) #rgb colour
+    pyg.draw.line(screen, "#000000", (1, 500), (1, 0), line_thickness)
+    pyg.draw.line(screen, "#000000", (gap_between_lines, 500), (gap_between_lines, 0), line_thickness)
+    drawLine((30, 10), 100, 'H')
+    drawLine((30, gap_between_lines+10), 100, 'H')
     pyg.display.flip()
+
+pyg.display.update()
 pyg.quit()
 
-
-maze.mainloop()
+# maze.mainloop()
